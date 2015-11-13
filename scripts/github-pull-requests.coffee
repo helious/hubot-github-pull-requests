@@ -33,7 +33,7 @@ module.exports = (robot) ->
 
           repoOwners isnt null and repoOwners.indexOf(repoOwner) > -1
 
-        gitHub.team(process.env.GITHUB_PRS_TEAM_ID)
+        gitHub.user('helious')
           .reposAsync(per_page: 100, page: page)
           .then (data) ->
             reposByPage = data[0]
