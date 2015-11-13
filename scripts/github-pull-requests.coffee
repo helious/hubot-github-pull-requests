@@ -9,7 +9,7 @@
 # Configuration:
 #   GITHUB_PRS_OAUTH_TOKEN = # (Required) A GitHub OAuth token generated from your account.
 #   GITHUB_PRS_USER = # (Required if GITHUB_PRS_TEAM_ID is not set) A GitHub username.
-#   GITHUB_PRS_TEAM_ID = # (Required if GITHUB_PRS_USER is not set) A GitHub Team ID returned from GitHub's API. Takes precendence over GITHUB_PRS_USER.
+#   ` = # (Required if GITHUB_PRS_USER is not set) A GitHub Team ID returned from GitHub's API. Takes precedence over GITHUB_PRS_USER.
 #   GITHUB_PRS_REPO_OWNER_FILTER = # (Optional) A string that contains the names of users you'd like to filter by. (Helpful when you have a lot of forks on your repos that you don't care about.)
 #
 # Commands:
