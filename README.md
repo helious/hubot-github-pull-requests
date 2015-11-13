@@ -29,7 +29,7 @@ Add hubot-github-pull-requests to `external-scripts.json`
 
 You will need to set a few environment variables:
 
-```
+```bash
 GITHUB_PRS_OAUTH_TOKEN = # (Required) A GitHub OAuth token generated from your account.
 GITHUB_PRS_TEAM_ID = # (Required) The GitHub Team ID returned from GitHub's API.
 GITHUB_PRS_REPO_OWNER_FILTER = # (Optional) A string that contains the names of users you'd like to filter by. (Helpful when you have a lot of forks on your repos that you don't care about.)
