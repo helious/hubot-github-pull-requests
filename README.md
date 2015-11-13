@@ -13,7 +13,7 @@ $ npm install hubot-github-pull-requests --save
 
 Add hubot-github-pull-requests to `external-scripts.json`
 
-```
+```javascript
 ["hubot-github-pull-requests"]
 ```
 
