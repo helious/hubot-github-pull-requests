@@ -4,11 +4,12 @@
 # Dependencies:
 #   "async": "~1.4.2",
 #   "bluebird": "~2.10.0",
-#   "octonode": ">0.6.0 <0.8.0"
+#   "octonode": "> 0.6.0 < 0.8.0"
 #
 # Configuration:
 #   GITHUB_PRS_OAUTH_TOKEN = # (Required) A GitHub OAuth token generated from your account.
-#   GITHUB_PRS_TEAM_ID = # (Required) The GitHub Team ID returned from GitHub's API.
+#   GITHUB_PRS_USER = # (Required if GITHUB_PRS_TEAM_ID is not set) A GitHub username.
+#   GITHUB_PRS_TEAM_ID = # (Required if GITHUB_PRS_USER is not set) A GitHub Team ID returned from GitHub's API. Takes precendence over GITHUB_PRS_USER.
 #   GITHUB_PRS_REPO_OWNER_FILTER = # (Optional) A string that contains the names of users you'd like to filter by. (Helpful when you have a lot of forks on your repos that you don't care about.)
 #
 # Commands:
@@ -26,14 +27,19 @@ module.exports = (robot) ->
   robot.respond /(pr|prs)/i, (msg) ->
     getAllRepos = (done) ->
       getReposByPage = (page) ->
+        userGitHub = if process.env.GITHUB_PRS_TEAM_ID?
+          gitHub.team process.env.GITHUB_PRS_TEAM_ID
+        else
+          gitHub.user process.env.GITHUB_PRS_USER
+
         repoIsDesired = (repoOwner) ->
           repoOwners = process.env.GITHUB_PRS_REPO_OWNER_FILTER
 
           return true unless repoOwners
 
-          repoOwners isnt null and repoOwners.indexOf(repoOwner) > -1
+          repoOwners? and repoOwners.indexOf(repoOwner) > -1
 
-        gitHub.team(process.env.GITHUB_PRS_TEAM_ID)
+        userGitHub
           .reposAsync(per_page: 100, page: page)
           .then (data) ->
             reposByPage = data[0]
@@ -96,7 +102,7 @@ module.exports = (robot) ->
         parallelGetPullRequests.push parallelifyGetPullRequests(repo)
 
       async.parallel parallelGetPullRequests, (err, results) ->
-        pullRequestCount = results.reduce (a, b) -> a + b
+        pullRequestCount = if results.length > 0 then results.reduce (a, b) -> a + b else 0
 
         isSingular = pullRequestCount is 1
 
