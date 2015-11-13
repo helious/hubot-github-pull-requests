@@ -27,11 +27,10 @@ module.exports = (robot) ->
   robot.respond /(pr|prs)/i, (msg) ->
     getAllRepos = (done) ->
       getReposByPage = (page) ->
-         = ->
-          if process.env.GITHUB_PRS_TEAM_ID?
-            gitHub.team process.env.GITHUB_PRS_TEAM_ID
-          else
-            gitHub.user process.env.GITHUB_PRS_USER
+        userGitHub = if process.env.GITHUB_PRS_TEAM_ID?
+          gitHub.team process.env.GITHUB_PRS_TEAM_ID
+        else
+          gitHub.user process.env.GITHUB_PRS_USER
 
         repoIsDesired = (repoOwner) ->
           repoOwners = process.env.GITHUB_PRS_REPO_OWNER_FILTER
@@ -40,7 +39,7 @@ module.exports = (robot) ->
 
           repoOwners? and repoOwners.indexOf(repoOwner) > -1
 
-        meow()
+        userGitHub
           .reposAsync(per_page: 100, page: page)
           .then (data) ->
             reposByPage = data[0]
