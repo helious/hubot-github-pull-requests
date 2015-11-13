@@ -1,9 +1,22 @@
 # Description:
 #   A way to list all currently open PRs on GitHub.
 #
+# Dependencies:
+#   "async": "~1.4.2",
+#   "bluebird": "~2.10.0",
+#   "octonode": ">0.6.0 <0.8.0"
+#
+# Configuration:
+#   GITHUB_PRS_OAUTH_TOKEN = # (Required) A GitHub OAuth token generated from your account.
+#   GITHUB_PRS_TEAM_ID = # (Required) The GitHub Team ID returned from GitHub's API.
+#   GITHUB_PRS_REPO_OWNER_FILTER = # (Optional) A string that contains the names of users you'd like to filter by. (Helpful when you have a lot of forks on your repos that you don't care about.)
+#
 # Commands:
 #   hubot pr - Returns a list of open PR links from GitHub.
 #   hubot prs - Same as "hubot pr".
+#
+# Author:
+#   helious (David Posey)
 
 async = require 'async'
 Promise = require 'bluebird'
@@ -14,13 +27,13 @@ module.exports = (robot) ->
     getAllRepos = (done) ->
       getReposByPage = (page) ->
         repoIsDesired = (repoOwner) ->
-          repoOwners = process.env.GITHUB_PRS_OWNER_FILTER
+          repoOwners = process.env.GITHUB_PRS_REPO_OWNER_FILTER
 
           return true unless repoOwners
 
           repoOwners isnt null and repoOwners.indexOf(repoOwner) > -1
 
-        gitHub.team(process.env.GITHUB_TEAM_ID)
+        gitHub.team(process.env.GITHUB_PRS_TEAM_ID)
           .reposAsync(per_page: 100, page: page)
           .then (data) ->
             reposByPage = data[0]
@@ -88,7 +101,7 @@ module.exports = (robot) ->
         isSingular = pullRequestCount is 1
 
         msg.send "There #{ if isSingular then 'is' else 'are' } #{ pullRequestCount } open Pull Request#{ if isSingular then '.' else 's.' }"
-    gitHub = Octonode.client(process.env.GITHUB_OAUTH_TOKEN)
+    gitHub = Octonode.client(process.env.GITHUB_PRS_OAUTH_TOKEN)
     repos = []
 
     getAllRepos getAllPullRequests

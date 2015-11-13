@@ -1,22 +1,28 @@
 {
   "name": "hubot-github-pull-requests",
   "version": "1.0.0",
-  "author": "helious",
+  "author": "David Posey",
   "keywords": [
-    "git",
     "github",
     "pr",
     "prs",
+    "pull-request",
+    "pull-requests",
     "pull request",
     "pull requests",
     "hubot",
-    "hubot-scripts"
+    "hubot-scripts",
+    "github-pull-requests"
   ],
-  "description": "A script for hubot that add a command to show open pull requests for repos you own/have access to and care about.",
+  "description": "A script for Hubot to show open pull requests on GitHub for repos you own/have access to and care about.",
+  "main": "index.coffee",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/github/hubot.git"
+    "url": "https://github.com/helious/hubot-github-pull-requests"
+  },
+  "bugs": {
+    "url": "https://github.com/helious/hubot-github-pull-requests/issues"
   },
   "dependencies": {
     "async": "~1.4.2",
