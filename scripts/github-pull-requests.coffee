@@ -86,8 +86,12 @@ module.exports = (robot) ->
               title = pr.title
               updatedAt = pr.updated_at
               user = pr.user.login
+              people = user
 
-              msg.send "/me - #{ repo } - ##{ number } - #{ title } - #{ user } - #{ url } - #{ lastUpdated updatedAt }"
+              if pr.assignee
+                people = "#{ user }->#{ pr.assignee.login }"
+
+              msg.send "/me - #{ repo } - ##{ number } - #{ title } - #{ people } - #{ url } - #{ lastUpdated updatedAt }"
             prs = data[0]
 
             postToHipChat pr for pr in prs
