@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.2.0] - 2016-05-09
 ### Added
-- Displaying pull request signee (if available).
+- Displaying pull request assignee (if available).
 - Better Slack messaging.
 
 ## [1.1.2] - 2015-11-13
