@@ -36,6 +36,8 @@ GITHUB_PRS_TEAM_ID = # (Required if GITHUB_PRS_USER is not set) A GitHub Team ID
 GITHUB_PRS_REPO_OWNER_FILTER = # (Optional) A string that contains the names of users you'd like to filter by. (Helpful when you have a lot of forks on your repos that you don't care about.)
 ```
 
+### For Help Finding a/your GitHub Team ID(s) (thanks @davedash)
+http://fabian-kostadinov.github.io/2015/01/16/how-to-find-a-github-team-id/
 
 ## License
 
