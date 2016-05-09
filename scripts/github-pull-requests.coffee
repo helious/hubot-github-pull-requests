@@ -18,6 +18,7 @@
 #
 # Author:
 #   helious (David Posey)
+#   davedash (Dave Dash)
 
 async = require 'async'
 Promise = require 'bluebird'
@@ -64,7 +65,7 @@ module.exports = (robot) ->
         gitHubRepo
           .prsAsync()
           .then (data) ->
-            postToHipChat = (pr) ->
+            postToChat = (pr) ->
               lastUpdated = (date) ->
                 pluralize = (amount, unit) ->
                   if amount
@@ -91,10 +92,13 @@ module.exports = (robot) ->
               if pr.assignee
                 people = "#{ user }->#{ pr.assignee.login }"
 
-              msg.send "/me - #{ repo } - ##{ number } - #{ title } - #{ people } - #{ url } - #{ lastUpdated updatedAt }"
+              if robot.adapterName == 'slack'
+                msg.send ":octocat: #{ title } - #{ people } - #{ url } - #{ lastUpdated updatedAt }"
+              else
+                msg.send "/me - #{ repo } - ##{ number } - #{ title } - #{ people } - #{ url } - #{ lastUpdated updatedAt }"
             prs = data[0]
 
-            postToHipChat pr for pr in prs
+            postToChat pr for pr in prs
           .then ->
             done null, prs.length
 
