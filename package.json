@@ -1,7 +1,10 @@
 {
   "name": "hubot-github-pull-requests",
-  "version": "1.1.1",
-  "author": "David Posey",
+  "version": "1.2.0",
+  "author": "David Posey (https://github.com/helious)",
+  "contributors": [
+    "Dave Dash (https://github.com/davedash)"
+  ],
   "keywords": [
     "github",
     "pr",

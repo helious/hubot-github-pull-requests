@@ -92,7 +92,7 @@ module.exports = (robot) ->
               if pr.assignee
                 people = "#{ user }->#{ pr.assignee.login }"
 
-              if robot.adapterName == 'slack'
+              if robot.adapterName is 'slack'
                 msg.send ":octocat: #{ title } - #{ people } - #{ url } - #{ lastUpdated updatedAt }"
               else
                 msg.send "/me - #{ repo } - ##{ number } - #{ title } - #{ people } - #{ url } - #{ lastUpdated updatedAt }"
