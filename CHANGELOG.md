@@ -2,10 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.2.0]
+## [1.2.0] - 2016-05-09
 ### Added
 - Displaying pull request signee (if available).
 - Better Slack messaging.
 
-## [1.1.2] - 2016-11-13
+## [1.1.2] - 2015-11-13
 ### Beginning of time
