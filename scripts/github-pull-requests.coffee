@@ -115,7 +115,11 @@ module.exports = (robot) ->
         isSingular = pullRequestCount is 1
 
         msg.send "There #{ if isSingular then 'is' else 'are' } #{ pullRequestCount } open Pull Request#{ if isSingular then '.' else 's.' }"
-    gitHub = Octonode.client(process.env.GITHUB_PRS_OAUTH_TOKEN)
+    gitHub = if process.env.GITHUB_PRS_GHE_API_URL?
+      Octonode.client(process.env.GITHUB_PRS_OAUTH_TOKEN, hostname: process.env.GITHUB_PRS_GHE_API_URL)
+    else
+      Octonode.client(process.env.GITHUB_PRS_OAUTH_TOKEN)
+
     repos = []
 
     getAllRepos getAllPullRequests

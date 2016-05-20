@@ -30,6 +30,7 @@ Add hubot-github-pull-requests to `external-scripts.json`
 You will need to set a few environment variables:
 
 ```bash
+GITHUB_PRS_GHE_API_URL = # (Optional) If you use a hosted GitHub Enterprise server, this is your v3 API URL. (E.g. github.yourdomain.com/api/v3)
 GITHUB_PRS_OAUTH_TOKEN = # (Required) A GitHub OAuth token generated from your account.
 GITHUB_PRS_USER = # (Required if GITHUB_PRS_TEAM_ID is not set) A GitHub username.
 GITHUB_PRS_TEAM_ID = # (Required if GITHUB_PRS_USER is not set) A GitHub Team ID returned from GitHub's API. Takes precendence over GITHUB_PRS_USER.
