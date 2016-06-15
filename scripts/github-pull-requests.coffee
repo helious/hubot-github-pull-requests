@@ -25,7 +25,7 @@ Promise = require 'bluebird'
 Octonode = Promise.promisifyAll(require 'octonode')
 
 module.exports = (robot) ->
-  robot.respond /(pr|prs)/i, (msg) ->
+  robot.respond /(pr\b|prs)/i, (msg) ->
     getAllRepos = (done) ->
       getReposByPage = (page) ->
         userGitHub = if process.env.GITHUB_PRS_TEAM_ID?
